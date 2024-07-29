@@ -1,4 +1,4 @@
-# Kubernetes's configuration file to deploy and manage Docker based "Voting & Result Application" locally and in AWS cloud.
+## Kubernetes deployment of docker based "Voting & Result Application" locally in minikube cluster and in AWS cloud using EKS.
 
 A simple kubernetes configuration file and steps to deploy "Voting & Result Application" build on various tech stack.
 
