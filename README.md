@@ -269,11 +269,13 @@ High level Steps:
 
 6) Test in browser:
 ```
-    i) Get the Load Balancer URL for Voting-App and cast the vote.     
+    i) Get the Load Balancer URL for Voting-App and cast the vote.  
+        - Ex: http://ab78f4c7fb7504630babf3c109664c04-1214082222.us-west-2.elb.amazonaws.com/
         - See the screenshot 
         - You can get the URL either by running "kubectl get all" and copying the Voting-App LB URL or copying from EKS cluster detail screens.
 
     2) Get the Load Balancer URL for Result-App and see the result.
+        - Ex: http://ae9eab06f2c5047cabda30e50822f3c4-943666047.us-west-2.elb.amazonaws.com/
         - See the screenshot 
         - You can get the URL either by running "kubectl get all" and copying the Result-App LB URL or copying from EKS cluster detail screens.
         
