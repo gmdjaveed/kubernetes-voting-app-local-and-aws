@@ -208,20 +208,20 @@ git clone https://github.com/dockersamples/example-voting-app.git
 ```
 ## GOAL-2: Deploy all the Pods and Services in AWS Kubernetes cluster and It will maintains the required number of pods and replicas. Finally Test in browser.
 
-    High level Steps:
-    -----------------
-    1) Login to your AWS console. 
+High level Steps:
+-----------------
+1) Login to your AWS console. 
 ```
     - For testing purpose you might use root account but this is not advisable in production.
 ```
         
-    2) Pre requiste:            
+2) Pre requiste:            
 ```
     - Need to have two roles a) EKS cluster role and b) Eks group node 
     - Note: Checkout screenshot folder for IAM Role details        
 ```
 
-    3) Create Node Cluster in AWS us-west-2 (Ohio region). Note: Control plan is fully managed by AWS so no direct access to ssh here.
+3) Create Node Cluster in AWS us-west-2 (Ohio region). Note: Control plan is fully managed by AWS so no direct access to ssh here.
 ```
     - Wait for about 10 minutes to complete creation.
     - https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html
@@ -229,13 +229,13 @@ git clone https://github.com/dockersamples/example-voting-app.git
     - role issues workarounds : https://devops.stackexchange.com/questions/11722/cannot-configure-node-group-in-new-eks-cluster-due-to-no-node-iam-role-found    
 ```
 
-    4) Create Node Group ( Tab Compute -> node group). You can choose to have optionally ssh by selecting the ec2 key option.
+4) Create Node Group ( Tab Compute -> node group). You can choose to have optionally ssh by selecting the ec2 key option.
 ```
     - Wait for about 10 minutes to complete creation.
     - pre requiste : Need to have two roles a) EKS cluster role and b) Eks group node 
 ```
 
-    5) Deploy the Pods & Services:
+5) Deploy the Pods & Services:
 ```
     a)Once EKS Cluster and Node Group are created, click on "Cloud shell" icon to open the terminal from your EKS cluster screen.
       - Checkout the screenshot folder
