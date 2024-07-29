@@ -25,7 +25,7 @@ Vote-App : Python
 Result-App : Node JS
 ```
 
-### Back-End:
+### Back-End Apps:
 ```
 In Memory DB: redis
 Database : Postgress  
