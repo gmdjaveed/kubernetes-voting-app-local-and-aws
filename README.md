@@ -3,7 +3,7 @@
 A simple kubernetes configuration file and steps to deploy "Voting & Result Application" build on various tech stack.
 
 
-###Note:
+### Note:
 ```
 This is based on the original example-voting-app repository from the docker-examples GitHub page and modified it to work on the Kubernetes cluster LOCALLY and in AWS.
 
@@ -19,19 +19,19 @@ Note:
 ```
 
 
-###Front-End:
+### Front-End:
 ```
 Vote : Python
 Result : Node Js
 ```
 
-###Back-End:
+### Back-End:
 ```
 In Memory : redis
 Database : Postgress  
 ```
 
-###Back-End:
+### Back-End:
 ```
 Worker : .Net 
     - Responsible to take data from in memory "redis" datatbase inserted by voting app and to pass on to "postgress" database for the result app to view.
@@ -79,7 +79,7 @@ git clone https://github.com/dockersamples/example-voting-app.git
 ```
 
 
-## GOAL:1 Deploy all the Pods and Services in LOCAL Kubernetes cluster and It will maintains the required number of pods and replicas.  Finally Test in browser.
+## GOAL-1: Deploy all the Pods and Services in LOCAL Kubernetes cluster and It will maintains the required number of pods and replicas.  Finally Test in browser.
 ```   
     Steps:
     ------
@@ -209,77 +209,70 @@ git clone https://github.com/dockersamples/example-voting-app.git
            |-----------|----------------|-------------|------------------------|
            * Opening service default/result-service in default browser...
            ! Because you are using a Docker driver on windows, the terminal needs to be open to run it.
-
-
 ```
-
-## GOAL:2 Deploy all the Pods and Services in AWS Kubernetes cluster and It will maintains the required number of pods and replicas. Finally Test in browser.
-
+## GOAL-2: Deploy all the Pods and Services in AWS Kubernetes cluster and It will maintains the required number of pods and replicas. Finally Test in browser.
 
     High level Steps:
     -----------------
     1) Login to your AWS console. 
 ```                 
-        - For testing purpose you might use root account but this is not advisable in production.
+    - For testing purpose you might use root account but this is not advisable in production.
 ```     
         
     2) Pre requiste:            
 ```     
-        - Need to have two roles a) EKS cluster role and b) Eks group node 
-        - Note: Checkout screenshot folder for IAM Role details        
+    - Need to have two roles a) EKS cluster role and b) Eks group node 
+    - Note: Checkout screenshot folder for IAM Role details        
 ```
 
     3) Create Node Cluster in AWS us-west-2 (Ohio region). Note: Control plan is fully managed by AWS so no direct access to ssh here.
 ```
-        - Wait for about 10 minutes to complete creation.
-        - https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html
-        - https://docs.aws.amazon.com/eks/latest/userguide/managed-node-groups.html
-        - role issues workarounds : https://devops.stackexchange.com/questions/11722/cannot-configure-node-group-in-new-eks-cluster-due-to-no-node-iam-role-found    
+    - Wait for about 10 minutes to complete creation.
+    - https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html
+    - https://docs.aws.amazon.com/eks/latest/userguide/managed-node-groups.html
+    - role issues workarounds : https://devops.stackexchange.com/questions/11722/cannot-configure-node-group-in-new-eks-cluster-due-to-no-node-iam-role-found    
 ```     
 
     4) Create Node Group ( Tab Compute -> node group). You can choose to have optionally ssh by selecting the ec2 key option.
 ```     
-        - Wait for about 10 minutes to complete creation.
-        - pre requiste : Need to have two roles a) EKS cluster role and b) Eks group node 
+    - Wait for about 10 minutes to complete creation.
+    - pre requiste : Need to have two roles a) EKS cluster role and b) Eks group node 
 ```         
 
     5) Deploy the Pods & Services:
 ```     
-        a)Once EKS Cluster and Node Group are created, click on "Cloud shell" icon to open the terminal from your EKS cluster screen.
-          - Checkout the screenshot folder
-        
-        b)git all the deployment manifest file from github repo as follows:
-          git clone https://github.com/gmdjaveed/kubernetes-voting-app-local-and-aws.git
-          
-        
-        c)Deploy the pods and services:
-            -- Deploy redis
-            $ kubectl create -f redis-deploy.yaml
-            $ kubectl create -f redis-service.yaml
+    a)Once EKS Cluster and Node Group are created, click on "Cloud shell" icon to open the terminal from your EKS cluster screen.
+      - Checkout the screenshot folder
 
-            -- Deploy postgres
-            $ kubectl create -f postgres-deploy.yaml
-            $ kubectl create -f postgres-service.yaml
+    b)git all the deployment manifest file from github repo as follows:
+      git clone https://github.com/gmdjaveed/kubernetes-voting-app-local-and-aws.git
 
-            -- Deploy worker. Note: There is no worker service since no other is dependent on this. worker depends on redis and postgress services.
-            $ kubectl create -f worker-deploy.yaml
+    c)Deploy the pods and services:
+        -- Deploy redis
+        $ kubectl create -f redis-deploy.yaml
+        $ kubectl create -f redis-service.yaml
 
-            -- Deploy voting-app
-            $ kubectl create -f voting-app-deploy.yaml
-            $ kubectl create -f voting-app-service.yaml
+        -- Deploy postgres
+        $ kubectl create -f postgres-deploy.yaml
+        $ kubectl create -f postgres-service.yaml
 
-            -- Deploy result-app
-            $ kubectl create -f result-app-deploy.yaml
-            $ kubectl create -f result-app-service.yaml   
-            
-        d)Verify the deployed pods and services:   
-            $ kubectl get all    
-            
+        -- Deploy worker. Note: There is no worker service since no other is dependent on this. worker depends on redis and postgress services.
+        $ kubectl create -f worker-deploy.yaml
+
+        -- Deploy voting-app
+        $ kubectl create -f voting-app-deploy.yaml
+        $ kubectl create -f voting-app-service.yaml
+
+        -- Deploy result-app
+        $ kubectl create -f result-app-deploy.yaml
+        $ kubectl create -f result-app-service.yaml   
+
+    d)Verify the deployed pods and services:   
+        $ kubectl get all                
 ```
 
 6) Test in browser:
 ```            
-
     i) Get the Load Balancer URL for Voting-App and cast the vote.     
         - See the screenshot 
         - You can get the URL either by running "kubectl get all" and copying the Voting-App LB URL or copying from EKS cluster detail screens.
