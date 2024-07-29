@@ -19,20 +19,16 @@ Note:
 ```
 
 
-### Front-End:
+### Front-End Apps:
 ```
-Vote : Python
-Result : Node Js
+Vote-App : Python
+Result-App : Node JS
 ```
 
 ### Back-End:
 ```
-In Memory : redis
+In Memory DB: redis
 Database : Postgress  
-```
-
-### Back-End:
-```
 Worker : .Net 
     - Responsible to take data from in memory "redis" datatbase inserted by voting app and to pass on to "postgress" database for the result app to view.
 ```
